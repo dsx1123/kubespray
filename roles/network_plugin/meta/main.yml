@@ -30,5 +30,10 @@ dependencies:
     tags:
       - contiv
 
+  - role: kubernetes-apps/network_plugin/contiv-aci
+    when: kube_network_plugin == 'contiv-aci'
+    tags:
+      - contiv-aci
+
   - role: network_plugin/cloud
     when: kube_network_plugin == 'cloud'

@@ -1,0 +1,12 @@
+## Most of the host configuration is derived from other configurations however we need to know
+## the name of the interfaces toward the mgmg access and the fabric.
+mgmt_if_name: eth0
+mgmt_netmask: 255.255.255.0
+gw: 172.16.176.1
+aci_if_name: eth1
+aci_if_mtu: 9000
+## The GW parameter is derived from the aci-provision file configuration as there we configure the IP address of the bridge
+## domain used for the host configuration.
+routes_to_aci:
+  - 12.0.0.0/16
+  - 13.0.0.0/16

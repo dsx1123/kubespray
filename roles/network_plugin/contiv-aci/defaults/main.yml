@@ -1,0 +1,57 @@
+# File name of the ACC provision installer, this is only used if you are using the script to deploy and/or configure the nodes.
+# It will not be used if you are just running the "standard" kubespray playbook (cluster.ym)
+acc_provision_installer: acc-provision_1.7.2-42_amd64.deb
+#
+# Configuration for ACI Fabric
+#
+aci_config:
+  system_id: ten_shdu_kube # Every opflex cluster must have a distict ID
+  apic_hosts:                   # List of APIC hosts to connect for APIC API
+  - 172.16.176.120
+  - 172.16.176.121
+  - 172.16.176.122
+  vmm_domain:                   # Kubernetes VMM domain configuration
+    encap_type: vxlan           # Encap mode: vxlan or vlan
+    mcast_range:                # Every opflex VMM must use a distinct range
+      start: 225.20.1.1
+      end: 225.20.255.255
+    mcast_fabric: 225.1.2.4
+    nested_inside:
+        #type: vmware
+        #name: ACI
+  # The following resources must already exist on the APIC,
+  # they are used, but not created by the provisioning tool.
+  aep: UCS-AEP           # The AEP for ports/VPCs used by this cluster
+  vrf:                          # This VRF used to create all kubernetes EPs
+    name: vrf-kube
+    tenant: ten_shdu_kube # This can be system-id or common
+  l3out:
+    name: l3_out
+    external_networks:
+    - external # Used for external contracts
+
+#
+# Networks used by Kubernetes
+#
+net_config:
+  node_subnet: 12.0.0.1/16      # Subnet to use for nodes
+  pod_subnet: 13.0.0.1/16       # Subnet to use for Kubernetes Pods
+  extern_dynamic: 14.0.0.1/24   # Subnet to use for dynamic external IPs
+  extern_static: 15.0.0.1/24    # Subnet to use for static external IPs
+  node_svc_subnet: 16.0.0.1/24  # Subnet to use for service graph
+  kubeapi_vlan: 4011            # The VLAN used by the physdom for nodes
+  service_vlan: 4012            # The VLAN used by LoadBalancer services
+  infra_vlan: 3967            # The VLAN used by ACI infra
+
+node_config:
+ uplink_iface: eth1 # The name of the uplink interface to ACI
+ vxlan_uplink_iface: vlan3967 # for vxlan, the infra-vlan subinterface
+
+#
+# Configuration for container registry
+# Update if a custom container registry has been setup
+#
+registry:
+  image_prefix: noiro                   # e.g: registry.example.com/noiro
+  # image_pull_secret: secret_name      # (if needed)
+
