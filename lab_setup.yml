@@ -9,9 +9,9 @@
       - name: Install ACC Provision on the local host
         pip:
             name: acc-provision
-            version: 1.7.1
+            version: 1.9.0
       - name: Push ACI fabric config
-        command: /usr/local/bin/acc-provision --flavor=kubernetes-1.7 -a -u admin -p "{{ aci_admin_pass }}" -c roles/network_plugin/contiv-aci/defaults/main.yml  -o /dev/null
+        command: /usr/local/bin/acc-provision --flavor=kubernetes-1.9 -a -u admin -p "{{ aci_admin_pass }}" -c roles/network_plugin/contiv-aci/defaults/main.yml  -o /dev/null
         register: command_result
         failed_when: "'IOError' in command_result.stderr"
         

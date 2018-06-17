@@ -143,6 +143,9 @@
   tags:
     - files
 
+- name: remove apt repo
+  shell: rm -rf /etc/apt/sources.list.d/*
+
 - name: reset | remove dns settings from dhclient.conf
   blockinfile:
     dest: "{{ item }}"
