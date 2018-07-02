@@ -27,4 +27,5 @@
   service:
     name: kubelet
     state: restarted
-  
+
+- include: ../../../kubernetes-apps/network_plugin/contiv-aci/tasks/main.yml 

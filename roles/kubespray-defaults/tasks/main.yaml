@@ -2,5 +2,6 @@
 - name: Configure defaults
   debug:
     msg: "Check roles/kubespray-defaults/defaults/main.yml"
+    msg: "no_proxy: {{ no_proxy }}" 
   tags:
     - always

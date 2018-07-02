@@ -94,3 +94,6 @@ target/
 # virtualenv
 venv/
 ENV/
+# key generated
+*.key
+*.crt

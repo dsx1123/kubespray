@@ -51,3 +51,6 @@
         folder: "{{ vm_vsphere_datacenter }}/vm/{{ vm_folder }}"
         name: "{{ inventory_hostname }}"
         state: absent
+- include: reset.yml
+
+
